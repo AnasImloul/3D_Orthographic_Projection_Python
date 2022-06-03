@@ -21,7 +21,15 @@ class Grid:
             dx = (x - self.center[0])/self.slot_size[0]
             dy = (y - self.center[1])/self.slot_size[1]
 
-            return 64*sin(-0.5*sqrt(dx*dx + dy*dy) + 2*t)
+            size = sqrt((self.size[0]*self.size[1])/(self.frequency[0]*self.frequency[1]))*0.75
+
+            if (dx>0 and dy>0):
+                if dx>dy:
+                    return (max(dx,0) + max(-dy,0))*size
+                else:
+                    return (max(-dx, 0) + max(dy, 0)) * size
+            return (max(dx, 0) + max(dy, 0)) * size
+
         self.function = f
 
         self.start = perf_counter()
@@ -44,7 +52,7 @@ class Grid:
                 """if c + 1 < self.frequency[0]:
                     self.walls.append(Wall(quad1=self.tiles[row][c], quad2=self.tiles[row][c+1]))"""
 
-
+        self.map()
 
 
     def render(self, screen):
@@ -91,5 +99,5 @@ class Grid:
             self.player[1] = max(0, min(self.frequency[1]-1, self.player[1]))
 
     def update(self, screen):
-        self.map()
+        #self.map()
         self.render(screen)
