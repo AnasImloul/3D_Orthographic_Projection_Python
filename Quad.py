@@ -21,7 +21,12 @@ class Quad:
         self.normal = cross(unit_x, unit_y)
         self.normal /= norm(self.normal)
 
-        self.brightness = ((dot(self.normal, (0, 0, 1))) + 1) / 2
+        self.light = array((0, 0, 1))
+
+        self.light = self.light / norm(self.light)
+
+        self.brightness = (dot(self.normal, self.light) + 1) / 2
+
         self.color = array(color) * self.brightness
 
 
@@ -116,7 +121,12 @@ class Wall:
         self.normal = dot(array(self.p1) - self.p3,array(self.p2) - self.p4)
         self.normal /= norm(self.normal)
 
-        self.brightness = (dot(self.normal, (0,0,1)) + 1)/2
+        self.light = array((0, 0, 1))
+
+        self.light = self.light / norm(self.light)
+
+        self.brightness = (dot(self.normal, self.light) + 1) / 2
+
 
         self.color *= self.brightness
 
