@@ -12,7 +12,7 @@ BG_COLOR = (255,255,255)
 
 perspective = array([[1,0,0],[0,0.5,1]]) @ rotMat(0,0,45) / sqrt(2)
 
-grid = Grid((0,0,0),(800,800),(32,32),perspective, color = (255,0,0))
+grid = Grid((0,0,0),(800,800),(16,)*2,perspective, color = (255,0,0))
 
 pygame.init()
 
